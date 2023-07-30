@@ -1,0 +1,203 @@
+{% extends 'student_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+{% block mystyle %}
+/* Custom style */
+    .accordion-button::after {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+      transform: scale(.7) !important;
+    }
+    .accordion-button:not(.collapsed)::after {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    }
+  .img-margin{
+      margin-left: 20px;
+      margin-right: -80px;
+  }
+  .stu-margin{
+      margin-left: 150px;
+  }
+  .name-margin{
+      margin-left: 10px;
+  }
+  .id-margin{
+      margin-left: 20px;
+  }
+  .dept-margin{
+      margin-left: 20px;
+      margin-right: 70px;
+  }
+  .sem-margin{
+      margin-left: 15px;
+      margin-right: 40px;
+  }
+  .session-margin{
+      margin-right: 10px;
+  }
+  .hall-margin{
+      margin-left: 20px;
+  }
+  .c_code_margin{
+      margin-left: 30px;
+  }
+  .colwidth{
+      margin-top: 5px;
+      padding: 3px;
+      background-color: gray;
+      color: black;
+  }
+  .item-style{
+    border-top: 1px solid black !important;
+    border-left: 1px solid black !important;
+    border-right: 1px solid black !important;
+}
+.item-style:last-child{
+  border-bottom: 1px solid black !important;
+}
+{% endblock mystyle %}
+    
+   
+{% block title %}{{block.super}} Student Running Courses {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+  <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mr-5">
+            <div class="container">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{student.profile_image}} alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{student.first_name}} {{student.last_name}}</h5>
+                <p class="card-text">Department of Computer Science and Engineering</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Student ID:</b> {{student.student_id}}</li>
+                <li class="list-group-item"><b>Session:</b>  {{student.session}}</li>
+                <li class="list-group-item"><b>Attached Hall:</b>  {{student.hall}}</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+
+
+
+
+    <div class="col-lg-9 col-md-8 col-sm-12">
+       
+
+
+
+
+
+        
+        <div class="row mt-4">
+            <h5><b>Regular Courses***</b></h5>
+        </div>
+        <div class="row">
+            <form action="" method="POST">
+                {% csrf_token %}
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">SI No</th>
+                    <th scope="col">Course Code</th>
+                    <th scope="col">Course Title</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><input type="text" value="{{course.course_code}}" style="width: 120px;" disabled></td>
+                        <td>{{course.course_name}}</td>
+                        <td>{{course.credit}}</td>
+                        <td>Regular</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if bl_courses %}
+            <div class="row mt-5">
+                <h5><b>BackLog Courses***</b></h5>
+            </div>
+
+            <div class="mt-4 mb-4">
+                <div class="accordion" id="myAccordion">
+                    {% for semester in backLogSemester %}
+                    <div class="accordion-item item-style">
+                        <h2 class="accordion-header" id="heading_{{forloop.counter}}">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_{{forloop.counter}}">{{semester}}</button>									
+                        </h2>
+                        <div id="collapse_{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                      <th scope="col">SI No</th>
+                                      <th scope="col">Course Code</th>
+                                      <th scope="col">Course Title</th>
+                                      <th scope="col">Credits</th>
+                                      <th scope="col">Remarks</th>
+                                    </tr>
+                                  </thead>
+                                <tbody>
+                                    {% for b_course in bl_courses %}
+                                    {% if b_course.semister_no == semester %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td><input type="checkbox" id="{{b_course.course_code}}" name="{{b_course.course_code}}" value="{{b_course.course_code}}"><span class="c_code_margin">{{b_course.course_code}}</span></td>
+                                            <td><label for="{{b_course.course_code}}">{{b_course.course_name}}</label></td>
+                                            <td>{{b_course.credit}}</td>
+                                            <td>BackLog</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div> 
+            {% endif %}
+            <input type="submit" class="btn btn-success w-100 mt-3" value="Registration Now">
+            </form>
+        </div>
+    </div>
+  </div>
+
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock script %}
+  
+  </body>
+</html>

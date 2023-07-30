@@ -1,0 +1,50 @@
+{% extends 'stuff_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" type="text/css" href="{% static 'student/css/style1.css' %}">
+{% endblock link %}
+    
+   
+{% block title %}{{block.super}} Profile {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="profile-sidebar">
+          <img src="" alt="">
+      </div>
+    </div>
+    <div class="col-8"></div>
+  </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>

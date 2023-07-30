@@ -1,0 +1,87 @@
+{% extends 'admin_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+
+
+{% block title %}{{block.super}} | Profile {% endblock title %}
+
+{% block content1 %}
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-2"></div>
+    <div class="col-8">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message.tags}}</strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content1 %}
+
+{% block content2 %}
+<div class="container">
+  <div class="col-lg-8 col-md-6 col-sm-12">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-md-6 mb-5">
+        <div class="card">
+          <div class="card-header text-lg-center">
+            <h2>Faculty Section</h2>
+          </div>
+          <div class="card-body text-lg-center">
+            <h5 class="card-title">Add | Delete Faculty </h5>
+            
+          </div>
+          <div class="card-footer text-lg-center">
+            <a href={% url 'chairman_teacher_reg' %} class="btn btn-primary mr-5 mb-2">Add Faculty</a>
+            <a href={% url 'delete_faculty_page' %} class="btn btn-primary mb-2 float-right">Delete Faculty</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-5">
+        <div class="card">
+          <div class="card-header text-lg-center">
+            <h2>Student Section</h2>
+          </div>
+          <div class="card-body text-lg-center">
+            <h5 class="card-title">Add | Delete Student </h5>
+            
+          </div>
+          <div class="card-footer text-lg-center">
+            <a href={% url 'chairman_student_reg' %} class="btn btn-primary mr-5 mb-2">Add Student</a>
+            <a href={% url 'delete_student_page' %} class="btn btn-primary mb-2 float-right">Delete Student</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>
+<br>
+<br>
+<br>
+<br>
+</div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+{{block.super}}
+{% endblock script %}
+
+</body>
+
+</html>

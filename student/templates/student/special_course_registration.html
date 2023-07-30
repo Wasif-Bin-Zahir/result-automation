@@ -1,0 +1,226 @@
+{% extends 'student_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+{% block mystyle %}
+/* Custom style */
+    .accordion-button::after {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+      transform: scale(.7) !important;
+    }
+    .accordion-button:not(.collapsed)::after {
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    }
+  .img-margin{
+      margin-left: 20px;
+      margin-right: -80px;
+  }
+  .stu-margin{
+      margin-left: 150px;
+  }
+  .name-margin{
+      margin-left: 10px;
+  }
+  .id-margin{
+      margin-left: 20px;
+  }
+  .dept-margin{
+      margin-left: 20px;
+      margin-right: 70px;
+  }
+  .sem-margin{
+      margin-left: 15px;
+      margin-right: 40px;
+  }
+  .session-margin{
+      margin-right: 10px;
+  }
+  .hall-margin{
+      margin-left: 20px;
+  }
+  .c_code_margin{
+      margin-left: 30px;
+  }
+  .colwidth{
+      margin-top: 5px;
+      padding: 3px;
+      background-color: gray;
+      color: black;
+  }
+  .item-style{
+      border-top: 1px solid black !important;
+      border-left: 1px solid black !important;
+      border-right: 1px solid black !important;
+  }
+  .item-style:last-child{
+    border-bottom: 1px solid black !important;
+  }
+{% endblock mystyle %}
+    
+   
+{% block title %}{{block.super}} Student Running Courses {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+  <div class="row p-2">
+        <div class="col-lg-3 col-md-4 col-sm-12 mb-3 mr-5">
+            <div class="container">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src={{student.profile_image}} alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{student.first_name}} {{student.last_name}}</h5>
+                <p class="card-text">Department of Computer Science and Engineering</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Student ID:</b> {{student.student_id}}</li>
+                <li class="list-group-item"><b>Session: {{session}}</b>  {{student.session}}</li>
+                <li class="list-group-item"><b>Attached Hall:</b>  {{student.hall}}</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    <div class="col-lg-9 col-md-8 col-sm-12" style="padding-right: 20px !important">
+        <div class="row">
+            <div class="col-3 img-margin">
+                <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="100px" width="100px">
+            </div>
+            <div class="col-8 mt-3">
+                <h4>Mawlana Bhashani Science and Technology University</h4>
+                <h5><u>Course Registration Form For Undergraduate/Graduate Student</u></h5>
+                <h6>Name of Degree/Course: <b><u>B.Sc Engineering</u></b></h6>
+            </div>
+        </div>
+        <div class="row">
+            <h6 class="ml-4"><span class="mr-4">Name of the student: <span class="name-margin"><u>{{student.first_name}} {{student.last_name}}</u></span></span>
+                <span class="stu-margin">Reg/Student ID: <span class="id-margin">{{student.student_id}}</span> </span>
+            </h6>
+        </div>
+        <div class="row">
+            <h6>Name of the Dept: <span class="dept-margin">CSE</span> <span class="sem-margin">Semester: No Semester Available for you</span> <span>Session: <span class="session-margin"></span>{{student.session}}</span></h6>
+        </div>
+        <div class="row">
+            <h6>Name of the Hall: <span class="hall-margin"></span>{{student.hall}}</h6>
+        </div>
+        <div class="row">
+            <form action="" method="POST" style="border: 1px solid gray" class="pb-4">
+                {% csrf_token %}
+
+            <div>
+                <div class="row mt-5 mb-5">
+                    <h5><b>BackLog Courses***</b></h5>
+                </div>
+                <div class="accordion" id="myAccordion">
+                    {% for semester in backLogSemester %}
+                    <div class="accordion-item item-style">
+                        <h2 class="accordion-header" id="heading_{{forloop.counter}}">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_{{forloop.counter}}">{{semester.semester_no}}</button>									
+                        </h2>
+                        <div id="collapse_{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                            <div class="card-body">
+                                <table class="table table-striped table-bordered table-hover w-100">
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">SI No</th>
+                                          <th scope="col">Course Code</th>
+                                          <th scope="col">Course Title</th>
+                                          <th scope="col">Credits</th>
+                                          <th scope="col">Remarks</th>
+                                        </tr>
+                                      </thead>
+                                    <tbody>
+                                        {% for b_course in backLogCourses %}
+                                        {% if b_course.semister_no == semester.semester_no %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td><input type="checkbox" id="{{b_course.course_code}}" name="{{b_course.course_code}}" value="{{b_course.course_code}}"><span class="c_code_margin">{{b_course.course_code}}</span></td>
+                                                <td><label for="{{b_course.course_code}}">{{b_course.course_name}}</label></td>
+                                                <td>{{b_course.credit}}</td>
+                                                <td>BackLog</td>
+                                            </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div> 
+            <div>
+                <div class="row mt-5 mb-5">
+                    <h5><b>Special Courses***</b></h5>
+                </div>
+                <div class="accordion" id="myAccordion2">
+                    {% for semester in specialSemester %}
+                    <div class="accordion-item item-style">
+                        <h2 class="accordion-header" id="heading_{{forloop.counter0}}">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_{{forloop.counter0}}">{{semester}}</button>									
+                        </h2>
+                        <div id="collapse_{{forloop.counter0}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion2">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">SI No</th>
+                                    <th scope="col">Course Code</th>
+                                    <th scope="col">Course Title</th>
+                                    <th scope="col">Credits</th>
+                                    <th scope="col">Special</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {% for b_course in specialCourses %}
+                                    {% if b_course.semister_no == semester %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td><input type="checkbox" id="{{b_course.course_code}}" name="{{b_course.course_code}}" value="{{b_course.course_code}}"><span class="c_code_margin">{{b_course.course_code}}</span></td>
+                                            <td><label for="{{b_course.course_code}}">{{b_course.course_name}}</label></td>
+                                            <td>{{b_course.credit}}</td>
+                                            <td>BackLog</td>
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                            </table> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <input type="submit" class="btn btn-success w-100 mt-5" value="Registration Now">
+            </form>
+        </div>
+    </div>
+  </div>
+
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock script %}
+  
+  </body>
+</html>

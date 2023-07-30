@@ -1,0 +1,271 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}  
+
+{% block mystyle %}
+.credit-margin{
+    margin-left: 80px;
+}
+.course-margin{
+    margin-left: 120px;
+}
+td{
+    border: 1px solid black;
+}
+tr{
+    border-bottom: 1px solid black;
+}
+th{
+    border: 2px solid black !important;
+    border-top: 2px solid black !important;
+}
+input[type=number]{
+    border: 1px solid #8d8dc1;
+}
+{% endblock mystyle %}
+   
+{% block title %} Detailed Mark sheet {% endblock title %} 
+{% block content1 %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message.tags}}</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content1 %}
+{% block content2 %}
+    <div class="container">
+<br>
+
+        <div class="row">
+            <h5>Course Title: {{c_name}}</h5>
+            <h5>Course Code: {{c_code}} </h5>
+            <div class="col-3"><h5 class="mb-3">Full Marks = 70</h5></div>
+        </div>
+
+
+
+
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <!-- <div class="row">
+                    <div class="col-10 text-center"><h6 class="mb-1" style="margin-left: 350px">Mark Secured in each question</h6></div>
+                    <div class="col-2"><h6 class="mb-1">Full Marks = 70</h6></div>
+                </div> -->
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">SI No</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">1</th>
+                            <th scope="col">2</th>
+                            <th scope="col">3</th>
+                            <th scope="col">4</th>
+                            <th scope="col">5</th>
+                            <th scope="col">6</th>
+                            <th scope="col">7</th>
+                            <th scope="col">8</th>
+                            <th scope="col">9</th>
+                            <th scope="col">Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for student, mark in regularStudents.items %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{student.student_id}}</td>
+                            {% if mark.q1 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" value="{{mark.q1}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+
+                            {% if mark.q2 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" value="{{mark.q2}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q3 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" value="{{mark.q3}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q4 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" value="{{mark.q4}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q5 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" value="{{mark.q5}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q6 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" value="{{mark.q6}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q7 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" value="{{mark.q7}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q8 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" value="{{mark.q8}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q9 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" value="{{mark.q9}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            
+                            <td>Regular</td>
+                        </tr>
+                    {% endfor %}
+
+                    {% for student, mark in backLogStudents.items %}
+                        <tr>
+                            <td>{{mark.count}}</td>
+                            <td>{{student.student_id}}</td>
+                            {% if mark.q1 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" value="{{mark.q1}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+
+                            {% if mark.q2 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" value="{{mark.q2}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q3 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" value="{{mark.q3}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q4 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" value="{{mark.q4}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q5 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" value="{{mark.q5}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q6 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" value="{{mark.q6}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q7 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" value="{{mark.q7}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q8 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" value="{{mark.q8}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q9 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" value="{{mark.q9}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+               <td>Backlog</td>
+                        </tr>
+                    {% endfor %}
+                    {% for student in special_students %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{student.student_id}}</td>
+                            {% if mark.q1 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" value="{{mark.q1}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question1_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+
+                            {% if mark.q2 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" value="{{mark.q2}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question2_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q3 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" value="{{mark.q3}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question3_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q4 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" value="{{mark.q4}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question4_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q5 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" value="{{mark.q5}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question5_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q6 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" value="{{mark.q6}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question6_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q7 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" value="{{mark.q7}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question7_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q8 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" value="{{mark.q8}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question8_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            {% if mark.q9 %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" value="{{mark.q9}}" class="form-control"></div></td>
+                            {% else %}
+                                <td><div class="form-group"><input max= "10" min= "0" type="number" name="question9_{{student.student_id}}" class="form-control"></div></td>
+                            {% endif %}
+                            <td>Special</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-2">
+                        <a href={% url 'course_details' c_code %} type="button" class="btn btn-info w-100">Course Home</a>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2"><input type="submit" value="Save" class="btn btn-success w-100"></div>
+                </div>
+            
+            </form>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>
+ 

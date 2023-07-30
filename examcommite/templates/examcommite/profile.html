@@ -1,0 +1,71 @@
+{% extends 'exam_committe_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block mystyle %}
+
+{% endblock mystyle %}
+
+
+{% block title %}{{block.super}} Profile {% endblock title %}
+
+{% block content1 %}
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message.tags}}</strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content1 %}
+
+{% block content2 %}
+<div class="container text-center">
+  <div class="row">
+    {% for f in exam_committe %}
+    <div class="col-4">
+      <div class="profile-sidebar">
+        <div class="card" style="width: 22rem;">
+          <img class="card-img-top" src={{f.profile_img}} alt="Card image cap" height="350px">
+          <div class="card-body">
+            <h3 class="card-title">{{f.first_name}} {{f.last_name}}</h3>
+            <p>Mawlana Bhashani Science and Technology University</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Mobile:</b> {{f.mobile_number}}</li>
+            <li class="list-group-item"><b>Email: </b> {{f.email}}</li>
+          </ul>
+          <!-- <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-8">
+
+    </div>
+  </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+{{block.super}}
+{% endblock script %}
+
+</body>
+
+</html>

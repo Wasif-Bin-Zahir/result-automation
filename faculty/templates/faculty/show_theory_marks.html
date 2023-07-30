@@ -1,0 +1,276 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}  
+
+{% block mystyle %}
+.credit-margin{
+    margin-left: 80px;
+}
+.course-margin{
+    margin-left: 120px;
+}
+td{
+    border: 1px solid black;
+}
+tr{
+    border-bottom: 1px solid black;
+}
+th{
+    border: 2px solid black !important;
+    border-top: 2px solid black !important;
+}
+input[type=number]{
+    border: 1px solid #8d8dc1;
+}
+{% endblock mystyle %}
+   
+{% block title %} Detailed Mark sheet {% endblock title %} 
+{% block content1 %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message.tags}}</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content1 %}
+{% block content2 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="180px" width="70%">
+            </div>
+            <div class="col-9 mt-3">
+                <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
+                <h5 class="text-center">Detailed Mark Sheet</h5>
+                <p class="text-center"> (To be sent to the Chairman of Examination Committee) </p>
+                <h4 class="text-center">Department of Computer Science and Engineering</h4>
+                <h6 class="text-center">{{semister_no}} B.Sc. (Engg.) Final Examination, 202*</h6>
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <h6>Course Code: {{c_code}} </h6>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="credit-margin">Credit Hours: {{credit}}</h6>
+                    </div>
+                    <div class="col-4">
+                        <h6>Course Title: {{c_name}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-10 text-center"><h6 class="mb-1" style="margin-left: 350px">Mark Secured in each question</h6></div>
+                    <div class="col-2"><h6 class="mb-1">Full Marks = 70</h6></div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">SI No</th>
+                            <th scope="col">Student ID</th>
+                            <th scope="col">1</th>
+                            <th scope="col">2</th>
+                            <th scope="col">3</th>
+                            <th scope="col">4</th>
+                            <th scope="col">5</th>
+                            <th scope="col">6</th>
+                            <th scope="col">7</th>
+                            <th scope="col">8</th>
+                            <th scope="col">9</th>
+                            <th scope="col">Total Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for student in regular_students_marks %}
+                        <tr class="text-center">
+                            <td>{{forloop.counter}}</td>
+                            <td>{{student.student_id}}</td>
+                            {% if student.q1 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q1}}</td>
+                            {% endif %}
+                            {% if student.q2 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q2}}</td>
+                            {% endif %}
+                            {% if student.q3 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q3}}</td>
+                            {% endif %}
+                            {% if student.q4 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q4}}</td>
+                            {% endif %}
+                            {% if student.q5 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q5}}</td>
+                            {% endif %}
+                            {% if student.q6 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q6}}</td>
+                            {% endif %}
+                            {% if student.q7 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q7}}</td>
+                            {% endif %}
+                            {% if student.q8 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q8}}</td>
+                            {% endif %}
+                            {% if student.q9 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q9}}</td>
+                            {% endif %}
+                            
+                            <td>{{student.total_marks}}</td>
+                        </tr>
+                    {% endfor %}
+
+                    {% for student, count in backLogStudents.items %}
+                    <tr class="text-center">
+                        <td>{{count}}</td>
+                        <td>{{student.student_id}}</td>
+                        {% if student.q1 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q1}}</td>
+                            {% endif %}
+                            {% if student.q2 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q2}}</td>
+                            {% endif %}
+                            {% if student.q3 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q3}}</td>
+                            {% endif %}
+                            {% if student.q4 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q4}}</td>
+                            {% endif %}
+                            {% if student.q5 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q5}}</td>
+                            {% endif %}
+                            {% if student.q6 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q6}}</td>
+                            {% endif %}
+                            {% if student.q7 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q7}}</td>
+                            {% endif %}
+                            {% if student.q8 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q8}}</td>
+                            {% endif %}
+                            {% if student.q9 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q9}}</td>
+                            {% endif %}
+                        <td>{{student.total_marks}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% for student in special_students_marks %}
+                    <tr class="text-center">
+                        <td>{{forloop.counter}}</td>
+                        <td>{{student.student_id}}</td>
+                        {% if student.q1 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q1}}</td>
+                            {% endif %}
+                            {% if student.q2 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q2}}</td>
+                            {% endif %}
+                            {% if student.q3 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q3}}</td>
+                            {% endif %}
+                            {% if student.q4 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q4}}</td>
+                            {% endif %}
+                            {% if student.q5 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q5}}</td>
+                            {% endif %}
+                            {% if student.q6 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q6}}</td>
+                            {% endif %}
+                            {% if student.q7 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q7}}</td>
+                            {% endif %}
+                            {% if student.q8 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q8}}</td>
+                            {% endif %}
+                            {% if student.q9 == 0 %}
+                                <td></td>
+                            {% else %}
+                            <td>{{student.q9}}</td>
+                            {% endif %}
+                        <td>{{student.total_marks}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-2">
+                        <a href={% url 'course_details' c_code %} type="button" class="btn btn-info w-100">Course Home</a>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="col-2">
+                        <a href={% url 'update_theory_marks' c_code %} type="button" class="btn btn-danger w-100">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>
+ 

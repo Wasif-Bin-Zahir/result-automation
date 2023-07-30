@@ -1,0 +1,137 @@
+{% extends 'exam_committe_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}  
+   
+{% block title %} {{block.super}} details external teacher mark {% endblock title %} 
+{% block mystyle %}
+  .mark-sheet{
+    border: 2px solid black;
+    width:400px;
+    margin-left: 200px;
+  }
+  td{
+    border: 1px solid black;
+}
+tr{
+    border-bottom: 1px solid black;
+}
+th{
+    border: 2px solid black !important;
+    border-top: 2px solid black !important;
+
+}
+input[type="number"]{
+
+}
+{% endblock mystyle %}
+
+{% block content1 %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message.tags}}</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content1 %}
+{% block content2 %}
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+        <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="180px" width="70%">
+    </div>
+    <div class="col-9 mt-3">
+        <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
+        <h4 class="text-center">Santosh Tangail-1902</h4>
+        <h4 class="text-center mark-sheet">Consolidated Marks-sheet</h4>
+        <h4 class="text-center">Department of Computer Science and Engineering</h4>
+        <h6 class="text-center">{{semister_no}} B.Sc. (Engg.) Final Examination, 202*</h6>
+        <div class="row mt-4 mb-4">
+            <div class="col-4">
+                <h6>Course Code: {{c_code}} </h6>
+            </div>
+            <div class="col-4">
+                <h6 class="credit-margin">Credit Hours: {{credit}}</h6>
+            </div>
+            <div class="col-4">
+                <h6>Course Title: {{c_name}}</h6>
+            </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <h5>(Consolidated Marks-sheet to be submitted to the Controller of Examinations)</h5>
+      </div>
+</div>
+    <div class="row">
+        <form action="" method="POST">
+            {% csrf_token %}
+        <table class="table table-striped table-bordered table-hover text-center">
+          <thead>
+            <tr>
+              <th scope="col">Student Id</th>
+              <th scope="col">Mark Secured</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              {% for student in regular_students %}
+              <tr class="text-center">
+                <td>{{student.student_id}}</td>
+                <td>
+                    {{student.marks}}
+                </td>
+              </tr>
+              {% endfor %}
+
+              {% for student in backLog_students %}
+              <tr class="text-center">
+                {% if student.remarks == 'BackLog' %}
+                <td>{{student.student_id}}(BL)</td>
+                {% else %}
+                <td>{{student.student_id}}</td>
+                {% endif %}
+                <td>
+                  {{student.marks}}
+                </td>
+              {% endfor %}
+
+              {% for student in special_students %}
+              <tr class="text-center">
+                  <td>{{student.student_id}}</td>
+                  <td>
+                    {{student.marks}}
+                </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-2">
+            <a href={% url 'exam_committe_course_details' c_code%} type="button" class="btn btn-info w-100">Course Home</a>
+          </div>
+            <div class="col-8"></div>
+            <div class="col-2"><a href={% url 'edit_external_teacher_marks' c_code %} class="btn btn-success w-100">Edit</a></div>
+        </div>
+    </form>
+     
+    </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>
+ 

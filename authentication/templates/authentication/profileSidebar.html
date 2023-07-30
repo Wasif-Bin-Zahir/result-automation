@@ -1,0 +1,18 @@
+<div class="profile_sidebar">
+    <div class="row">
+      <div class="col-12">
+        <div class="card" style="width: 100%;">
+          <img class="card-img-top" src={{user.profile_image.url}} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{user}}</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><a href="">Show Result</a></li>
+            <li class="list-group-item"><a href={% url 'course_registration' '1st Year 1st Semester' %}>Course Registration</a></li>
+            <li class="list-group-item"><a href="">Show Notification</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

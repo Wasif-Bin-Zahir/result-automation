@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'student/css/signup.css' %}"> {% endcomment %}
+{% endblock link %}
+    
+   
+{% block title %}{{block.super}} | SignUp {% endblock title %} 
+
+ {% block content1 %}
+ {% if messages %}
+ {% for message in messages %}
+ <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+  <strong>{{message.tags}}</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+ {% endfor %}
+{% endif %}
+ {% endblock content1 %}
+
+{% block content2 %}
+<div class="container">
+  <h4 class="text-center mt-2">Exam Controller Registration</h4>
+  <form method="POST" action="" enctype="multipart/form-data" novalidate >
+  <div class="row">
+      {% csrf_token %}
+      {% if form %}
+        {% for field in form %} 
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <span class="label-tag">{{field.label_tag}}</span> <span class="input-field">{{field}}</span> <p style="color: red">{{field.errors|striptags}}</p>
+              </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+        <input type="submit" class="btn btn-danger mt-2 btn-block w-100">
+  </div>
+  </form>
+         
+    <br>
+    <p class="text-lead text-info">If you already have an account please <a href={% url 'login' %} onclick={myclick}><span style="color:red">Login Now</span> </a> </p>
+</div>
+  
+
+{% endblock content2 %}
+
+{% block script %} 
+ {{block.super}}
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  function myclick(){
+    console.log('hello');
+  }
+  </script>
+ {% endblock script %}
+  
+  </body>
+</html>
+
+  

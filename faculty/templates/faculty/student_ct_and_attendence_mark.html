@@ -1,0 +1,213 @@
+{% extends 'teacher_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}  
+
+{% block mystyle %}
+.credit-margin{
+    margin-left: 80px;
+}
+.course-margin{
+    margin-left: 120px;
+}
+td{
+    border: 1px solid black;
+}
+tr{
+    border-bottom: 1px solid black;
+}
+th{
+    border: 2px solid black !important;
+    border-top: 2px solid black !important;
+}
+{% endblock mystyle %}
+   
+{% block title %} Attendence sheet {% endblock title %} 
+{% block content1 %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message.tags}}</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content1 %}
+{% block content2 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="200px" width="100%">
+            </div>
+            <div class="col-10 mt-3">
+                <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
+                <h4 class="text-center">Santosh Tangail-1902</h4>
+                <h4 class="text-center">Department of Computer Science and Engineering</h4>
+                <h6 class="text-center">{{semester_no}} B.Sc. (Engg.) Final Examination, 202*</h6>
+                <h6 class="text-center text-danger mb-2">CT and Attendence Mark</h6>
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <h6>Course Code: {{course_code}} </h6>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="credit-margin">Credit Hours: {{credit}}</h6>
+                    </div>
+                    <div class="col-4">
+                        <h6>Course Title: {{course_name}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-9"><h5 class="mb-3">Name of the Examiner(s): {{course_teacher}} </h5></div>
+                    <div class="col-3"><h5 class="mb-3">Full Marks = 30</h5></div>
+                </div>
+
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">SI</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Name of the Candidates</th>
+                    <th scope="col">Class Test/Assignment (20%)</th>
+                    <th scope="col">Class Attendence (10%)</th>
+                    <th scope="col">Total Mark (30%)</th>
+                    <th scope="col">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for student in regular_student_ct_and_attend_marks %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{student.student_name}}</td>
+                    {% if student.ct_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.ct_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.attendence_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.total_ct_and_attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.total_ct_and_attendence_marks}}
+                        </td>
+                    {% endif %}
+                    
+                    {% if student.remarks == 'BackLog' %}
+                        <td class="text-danger">{{student.remarks}}</td>
+                    {% else %}
+                        <td>{{student.remarks}}</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+                  {% for student, count in backLogStudents.items %}
+                  <tr>
+                    <td>{{count}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{student.student_name}}</td>
+                    {% if student.ct_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.ct_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.attendence_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.total_ct_and_attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.total_ct_and_attendence_marks}}
+                        </td>
+                    {% endif %}
+                    
+                    {% if student.remarks == 'BackLog' %}
+                        <td class="text-danger">{{student.remarks}}</td>
+                    {% else %}
+                        <td>{{student.remarks}}</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+
+                  {% for student in special_student_ct_and_attend_marks %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{student.student_name}}</td>
+                    {% if student.ct_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.ct_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.attendence_marks}}
+                        </td>
+                    {% endif %}
+                    {% if student.total_ct_and_attendence_marks == 0 %}
+                        <td class="text-center">0</td>
+                    {% else %}
+                        <td class="text-center">
+                            {{student.total_ct_and_attendence_marks}}
+                        </td>
+                    {% endif %}
+                    
+                    {% if student.remarks == 'Special' %}
+                        <td class="text-danger">{{student.remarks}}</td>
+                    {% else %}
+                        <td>{{student.remarks}}</td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+            </tbody>
+            </table>
+            <div class="row">
+                <div class="col-2">
+                    <a href={% url 'course_details' course_code %} type="button" class="btn btn-info w-100">Course Home</a>
+                </div>
+                <div class="col-8"></div>
+                <div class="col-2"><a href={% url 'edit_ct_and_attendence_mark' course_code %} type="button" class="btn btn-warning w-100">Edit</a></div>
+            </div>
+            
+        </div>  
+    </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>
+ 

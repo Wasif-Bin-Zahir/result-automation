@@ -1,0 +1,139 @@
+{% extends 'admin_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block mystyle %}
+.layout{
+	float: left;
+}
+.box1{
+	height: 280px;
+    margin-right: 15px;
+    position: relative;
+    width: 21rem;
+}
+.image{
+	width: 100%;
+	display: block;
+}
+.contents{
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 21rem;
+	background-color: rgb(54, 81, 202);
+	transition: all 0.3s ease-in;
+	text-align: center;
+}
+.box1:hover .contents, .box2:hover .contents, .box3:hover .contents{
+	opacity: 1;
+	/* transform: translate(20px , 20px); */
+}
+.head-1{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.mr-3{
+	margin-right: 8px;
+}
+.icon{
+	color: white;
+}
+.box1:hover{
+    height: 300px;
+	width: 100%;
+}
+.box1:hover img{
+    display: none;
+}
+.box1:hover h5{
+    display: none;
+}
+.delup-btn{
+    margin-bottom: 20px;
+}
+{% endblock mystyle%}
+    
+   
+{% block title %}{{block.super}} | Teacher List {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+<div class="container">
+  <h1 class="text-center text-warning m-4">Faculty Members</h1>
+  <div class="row">
+      {% for teacher in teachers %}
+        <div class="col-4 mt-5">
+            <div class="card" style="width: 21rem; height: 700px">
+
+                <div class="col-4 layout">
+                  <div class="box1">
+                    <div class="image">
+                      <img src={{teacher.profile_img}} height="300" style="width: 21rem">
+                    </div>
+                    <div class="contents">
+                      <h4 class="head-1">{{teacher.first_name}} {{teacher.last_name}}</h4>
+                        <p style="font-size: 25px; color: white;">{{teacher.position}}<b></b></p>
+                        <p class="icon">
+                          <span class="mr-3"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></span>
+                          <span class="mr-3"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></span>
+                          <span class="mr-3"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></span>
+                          <span class="mr-3"><i class="fa fa-pinterest fa-2x" aria-hidden="true"></i></span>
+                          <span><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></span>
+                        </p>
+                    </div>
+				          </div>
+			</div>
+                
+                
+<!--                 
+                <div class="card-body mt-3" style="width: 21rem; height:450px">
+                  <h5 class="card-title text-center mb-4">{{teacher.first_name}} {{teacher.last_name}}</h5>
+                  <h6><b>Interested Field</b></h6>
+                   <p style="text-align: justify"><b>{{teacher.interested_field}}</b></p>
+                </div> -->
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><b style="margin-right: 14px"> Mobile:</b>{{teacher.mobile_number}}</li>
+                  <li class="list-group-item"><b style="margin-right: 14px">Email:</b> {{teacher.email}}</li>
+                </ul>
+                <div class="card-body delup-btn">
+                  <a href="#" type="button" class="card-link btn btn-danger">Delete</a>
+                  <a href="#" type="button" class="card-link btn btn-danger" style="float: right;">Update</a>
+                </div>
+              </div>
+        </div>  
+      {% endfor %}
+     </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>

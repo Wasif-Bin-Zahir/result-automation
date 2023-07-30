@@ -1,0 +1,95 @@
+{% extends 'teacher_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block mystyle %}
+  .colwidth{
+    width: 70px;
+  }
+  .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    transform: scale(.7) !important;
+  }
+  .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+  }
+{% endblock mystyle %}
+    
+   
+{% block title %}{{block.super}} | Current Courses {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      {% for f in faculty %}
+        {% include  'faculty/profile_sidebar.html' %}
+      {% endfor %}
+    </div>
+    <div class="col-8">
+
+
+      <div class="mt-4 mb-4">
+        <div class="accordion" id="myAccordion">
+            {% for semester in all_semesters %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading_{{forloop.counter}}">
+                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapse_{{forloop.counter}}">{{semester}}</button>									
+                </h2>
+                <div id="collapse_{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#myAccordion">
+                    <table class="table table-striped text-center table-bordered table-hover table-dark">
+                        <thead>
+                            <tr>
+                              <th scope="col">Course Code</th>
+                              <th scope="col">Credit</th>
+                              <th scope="col">Course Title</th>
+                              <th scope="col">Details</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                          {% for cr in courses %}
+                            {% if cr.semister_no == semester %}
+                              <tr>
+                                <td>{{cr.course_code}}</td>
+                                <td>{{cr.credit}}</td>
+                                <td>{{cr.course_name}}</td>
+                                <td><a href={% url 'course_details' cr.course_code %} type="button" class="btn btn-warning">details</a></td>
+                              </tr>  
+                            {% endif %}
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> 
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>

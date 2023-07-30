@@ -1,0 +1,116 @@
+{% extends 'exam_committe_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}  
+   
+{% block title %} {{block.super}} show all marks{% endblock title %} 
+{% block mystyle %}
+td{
+  border: 1px solid black;
+}
+tr{
+  border-bottom: 1px solid black;
+}
+th{
+  border: 2px solid black !important;
+  border-top: 2px solid black !important;
+}
+.padd-table{
+  padding: 0px 30px;
+}
+input[type='number']{
+  border: 1px solid blue;
+}
+{% endblock mystyle %}
+
+{% block content1 %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message.tags}}</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content1 %}
+{% block content2 %}
+<div class="container">
+   <div class="row">
+        <div class="col-3">
+            <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="180px" width="70%">
+        </div>
+        <div class="col-9 mt-3">
+            <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
+            <h4 class="text-center" style="margin-left: -80px">Santosh Tangail-1902</h4>
+            <h4 class="text-center">Department of Computer Science and Engineering</h4>
+            <h6 class="text-center">{{semister_no}} B.Sc. (Engg.) Final Examination, 202*</h6>
+            <div class="row mt-4 mb-4">
+                <div class="col-4">
+                    <h6>Course Code: {{c_code}} </h6>
+                </div>
+                <div class="col-4">
+                    <h6 class="credit-margin">Credit Hours: {{credit}}</h6>
+                </div>
+                <div class="col-4">
+                    <h6>Course Title: {{c_name}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <h4 class="text-danger">(Average Number List)</h4>
+  </div>
+  <div class="row text-center padd-table">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Student ID</th>
+          <th scope="col">Internal</th>
+          <th scope="col">External</th>
+          <th scope="col">Third Examiner</th>
+          <th scope="col">Average</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for student, mark in student_marks.items %}
+        <tr>
+          <td>{{student.student_id}}</td>
+          <td>{{mark.course_teacher_mark}}</td>
+          <td>{{mark.external_teacher_mark}}</td>
+          {% if mark.third_examinner_mark == 0 %}
+            <td></td>
+          {% else %}
+            <td>{{mark.third_examinner_mark}}</td>
+          {% endif %}
+          <td>{{mark.average_mark}}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row padd-table">
+    <div class="col-2"><a href={% url 'exam_committe_course_details' c_code%} type="button" class="btn btn-info w-100">Course Home</a></div>
+    <div class="col-8"></div>
+    <div class="col-2">
+      <a href={% url 'edit_third_examinner_mark' c_code %} class="btn btn-success w-100">Edit</a>
+    </div>
+  </div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>
+ 

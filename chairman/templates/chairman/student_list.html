@@ -1,0 +1,70 @@
+{% extends 'admin_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+    
+{% block title %}{{block.super}} | Delete Student {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+<div class="container">
+    <div class="row">
+        <div class="col-3 mt-5 mr-3 text-center">
+            <div class="card" style="width: 17rem;">
+                <img class="card-img-top" src="https://icon-library.com/images/django-icon/django-icon-0.jpg"  height="280px" width="280px" alt="admin pro picture">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Chairman</h5>
+                  <p class="card-text text-justify">Department of Computer Science and Engineering</p>
+                  <a href="#" class="btn btn-primary w-100 text-center">More Info</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                {% for student in students %}
+                <div class="col-4 mt-5">
+                    <div class="card text-center">
+                        <div class="card-header bg-info">
+                            {{student.first_name}} {{student.last_name}}
+                        </div>
+                        <img src={{student.profile_image}} alt="" class="card-img-top" height="250px">
+                        <div class="card-body">
+                            <p class="card-text text-center text-success"><b>ID: {{student.student_id}} <br> Session: {{student.session}}</b></p>
+                        </div>
+                        <div class="card-footer">
+                           <a href="{% url 'delete_current_student' student.id %}" class="btn btn-danger w-100">Delete Now</a>  
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/signup.css' %}">
+{% endblock link %}
+    
+   
+{% block title %}{{block.super}} SignUp {% endblock title %} 
+
+ {% block content1 %}
+ {% endblock content1 %}
+
+{% block content2 %}
+<div class="container">
+  <h4 class="text-center mt-2">User Registration</h4>
+  <form method="POST" action="" enctype="multipart/form-data" novalidate >
+  <div class="row">
+      {% csrf_token %}
+      {% if form %}
+        {% for field in form %} 
+            <div class="col-6">
+              <div class="form-group mt-2">
+                <span class="label-tag">{{field.label_tag}}</span> <span class="input-field">{{field}}</span> <p style="color: red">{{field.errors|striptags}}</p>
+              </div>
+            </div>
+        {% endfor %}
+        {% endif %}
+        <input type="submit" class="btn btn-danger mt-2 btn-block w-100">
+  </div>
+  </form>
+         
+    <br>
+    <p class="text-lead text-white">If you already have an account please <a href="#" onclick={myclick}><span style="color:red">Login Now</span> </a> </p>
+</div>
+  
+
+{% endblock content2 %}
+
+{% block script %} 
+ {{block.super}}
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+    $( "#anim" ).on( "change", function() {
+      $( "#datepicker" ).datepicker( "option", "showAnim", $( this ).val() );
+    });
+  } );
+
+  function myclick(){
+    console.log('hello');
+  }
+  </script>
+ {% endblock script %}
+  
+  </body>
+</html>
+
+  

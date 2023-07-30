@@ -1,0 +1,8 @@
+.label-tag{
+    padding: 10px;
+    font-weight: bold;
+}
+.input-field{
+    /* border: 1px solid black; */
+    border-bottom: 2px solid rgb(223, 0, 0);
+  }

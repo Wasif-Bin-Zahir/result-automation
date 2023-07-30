@@ -1,0 +1,78 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% block mystyle %}
+ 
+{% endblock mystyle%}
+{% block title %}{{block.super}} Add Courses {% endblock title %} 
+
+ {% block content1 %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible mt-3 fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+ {% endblock content1 %}
+
+{% block content2 %}
+<div class="container">
+  <h4 class="text-center text-danger m-4">Add Semester and Session</h4>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      {% if Running_Semesters %}
+        <table class="table table-hover table-dark">
+            <thead>
+            <tr>
+                <th scope="col">Semester No</th>
+                <th scope="col">Session</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for Running_Semester in Running_Semesters %}
+                <tr>
+                    <td>{{Running_Semester.semester_no}}</td>
+                    <td>{{Running_Semester.session}}</td>
+                </tr>  
+                {% endfor %}
+            </tbody>
+      </table>
+      {% else %}
+          <h2 class="text-center text-danger m-5">No Course added yet....</h2>
+      {% endif %}
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <form method="POST" action="" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% if form %}
+            {{ form|crispy }}
+        {% endif %}
+        <br>
+        <input type="submit" class="btn btn-danger mt-2 btn-block w-100">
+        </form>
+    </div>
+  </div>
+    
+</div>
+  
+
+{% endblock content2 %}
+
+{% block script %} 
+ {{block.super}}
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  function myclick(){
+    console.log('hello');
+  }
+  </script>
+ {% endblock script %}
+  
+  </body>
+</html>
+
+  

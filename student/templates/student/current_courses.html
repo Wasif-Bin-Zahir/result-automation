@@ -1,0 +1,82 @@
+{% extends 'student_base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" type="text/css" href="{% static 'student/css/style1.css' %}">
+{% endblock link %}
+    
+   
+{% block title %}{{block.super}} Student Running Courses {% endblock title %} 
+
+ {% block content1 %}
+    <div class="container">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+ {% endblock content1 %}
+ 
+{% block content2 %}
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src={{student.profile_image}} alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{student.first_name}} {{student.last_name}}</h5>
+              <p class="card-text">Department of Computer Science and Engineering</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Student ID:</b> {{student.student_id}}</li>
+              <li class="list-group-item"><b>Session:</b>  {{student.session}}</li>
+              <li class="list-group-item"><b>Atached Hall:</b>  {{student.hall}}</li>
+            </ul>
+          </div>
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-12">
+        <h1 class="text-center m-1 text-warning">Running Courses</h1>
+        
+        <table class="table table-hover table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Number</th>
+              <th scope="col">Course Code</th>
+              <th scope="col">Course Name</th>
+              <th scope="col">Credit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for course in courses %}
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{course.course_code}}</td>
+              <td>{{course.course_name}}</td>
+              <td>{{course.credit}}</td>
+            </tr>   
+            {% endfor %}
+          </tbody>
+        </table>   
+    </div>
+  </div>
+</div>
+{% endblock content2 %}
+
+
+{% block script %}
+  {{block.super}}
+{% endblock script %}
+  
+  </body>
+</html>

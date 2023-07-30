@@ -1,0 +1,653 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+.col-1{width: 8.33%}
+.col-2{width: 16.66%}
+.col-3{width: 25%}
+.col-4{width: 33.33%}
+.col-5{width: 41.66%}
+.col-6{width: 50%}
+.col-7{width: 58.33%}
+.col-8{width: 66.66%}
+.col-9{width: 75%}
+.col-10{width: 83.33%}
+.col-11{width: 91.66%}
+.col-12{width: 100%}
+ 
+.row{
+	content: '';
+	display: block;
+	clear: both;
+}
+.layout{
+	float: left;
+}
+
+.topnav{
+	background-color: black;
+	height: 70px;
+	font-family: Helvetica, Sans-Serif;
+
+}
+.head{
+	padding: 15px;
+	margin-left: 40px;
+	color: white;
+	padding-bottom: 5px;
+	margin-top: 0;
+}
+.market{
+	color: #10de35;
+}
+.btnclm{
+	margin-right: 40px;
+	color: white;
+}
+
+.btn1{
+	background-color: #82b440;
+	color: white;
+	padding: 10px 25px;
+	position: relative;
+	top: 10px;
+	left: 460px;
+	font-size: 12px;
+	border-radius: 13px;
+}
+
+ 
+.codex{
+	font-family: 'Lobster', cursive;
+    color: black;
+    font-size: 34px;
+    letter-spacing: 3px;
+    margin-left: 100px;
+    padding-top: 40px;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.menu{
+	margin-top: 50px;
+    margin-left: 300px;
+    margin-bottom: 40px;
+}
+.menu a{
+	text-decoration: none;
+	font-size: 18px;
+	margin-left: 20px;
+	font-family: Helvetica, Sans-Serif;
+}
+
+.spacing{
+	margin-bottom: 50px;
+}
+
+.section{
+	height: 600px;
+	background-color: #7952b3;
+	padding: 45px 0px;
+	margin-bottom: 70px;
+	margin-top: 120px;
+
+}
+.ss1{
+	padding-bottom: 40px;
+	padding-left: 70px;
+}
+.s2{
+	margin-top: 100px;
+	color: white;
+}
+
+.codex2{
+	font-family: 'Lobster', cursive;
+	color: black;
+	font-size: 34px;
+	letter-spacing: 3px;
+	color: white;
+	
+}
+
+
+.btn2, .btn3{
+	background-color: white;
+	padding: 10px 30px;
+	font-size: 15px;
+	outline-style: none;
+	margin-left: 15px;
+}
+.head2{
+	font-family: Helvetica, Sans-Serif;
+    letter-spacing: 1.5px;
+    font-weight: bolder;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.head-2{
+	text-align: center;
+    padding: 40px 0px;
+}
+.sec{
+	padding: 0px 45px;
+	margin-bottom: 80px;
+	height: 1200px;
+}
+.s1{
+	text-align: center;
+	margin: 20px;
+	box-shadow: 2px 5px 12px gray;
+	height: 250px;
+	padding-top: 25px;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+
+.container{
+	padding: 0px 70px 0px 60px;
+	clear: both;
+}
+.box1{
+	height: 280px;
+    margin-right: 15px;
+    position: relative;
+    width: 21rem;
+}
+.box2{
+	height: auto;
+	margin-left: 15px;
+	position: relative;
+}
+.box3{
+	height: auto;
+	margin-left: 30px;
+	position: relative;
+}
+.image{
+	width: 100%;
+	display: block;
+}
+.contents{
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 21rem;
+	background-color: rgb(54, 81, 202);
+	transition: all 0.3s ease-in;
+	text-align: center;
+}
+.box1:hover .contents, .box2:hover .contents, .box3:hover .contents{
+	opacity: 1;
+	/* transform: translate(20px , 20px); */
+}
+.head-1{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.mr-3{
+	margin-right: 8px;
+}
+.icon{
+	color: white;
+}
+.box1:hover{
+    height: 300px;
+	width: 100%;
+}
+.box1:hover img{
+    display: none;
+}
+.box1:hover h5{
+    display: none;
+}
+.delup-btn{
+    margin-bottom: 20px;
+}
+/*--------------------------------------slide-in-up--------------------*/
+.box-4{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-4{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+}
+.contents-4{
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 0;
+	background-color: red;
+	transition: all 0.3s ease-in-out;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.head-4{
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+	margin: 0;
+	padding: 0;
+}
+.text-4{
+	font-size: 25px;
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+.box-4:hover .contents-4{
+	opacity: 1;
+	height: 40%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-4:hover .image-4{
+	transform: scale(1.2);
+}
+
+/*
+-------------------------------------slide-in-bigup------------------------------------------------------
+*/
+
+.box-5{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-5{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+}
+.contents-5{
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 0;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	 
+}
+.head-5{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-5{
+	font-size: 25px;
+	color: white;
+}
+.box-5:hover .contents-5{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-5:hover .image-5{
+	transform: scale(1.2);
+}
+
+/*
+-------------------------------------slide-in-bigzoomIn------------------------------------------------------
+*/
+
+.box-6{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-6{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+}
+.contents-6{
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	height: 0;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	 
+}
+.head-6{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-6{
+	font-size: 25px;
+	color: white;
+}
+.box-6:hover .contents-6{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-6:hover .image-6{
+	transform: scale(1.2);
+}
+
+/*
+-------------------------------------slide-in-left-side------------------------------------------------------
+*/
+
+.box-7{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-7{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+	transform: scale(1);
+}
+.contents-7{
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	bottom: 0;
+	top: 0;
+	width: 0;
+	height: 100%;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	 
+}
+.head-7{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-7{
+	font-size: 25px;
+	color: white;
+}
+.box-7:hover .contents-7{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-7:hover .image-7{
+	transform: scale(0.5);
+}
+
+/*
+-------------------------------------slide-in-right-side------------------------------------------------------
+*/
+
+.box-8{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-8{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+	transform: scale(1);
+}
+.contents-8{
+	position: absolute;
+	opacity: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	width: 0;
+	height: 100%;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	 
+}
+.head-8{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-8{
+	font-size: 25px;
+	color: white;
+}
+.box-8:hover .contents-8{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-8:hover .image-8{
+	transform: scale(0.5);
+}
+
+
+/*
+-------------------------------------slide-in-cross top------------------------------------------------------
+*/
+
+.box-9{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-9{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+	transform: scale(1.2);
+}
+.contents-9{
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	 
+}
+.head-9{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-9{
+	font-size: 25px;
+	color: white;
+}
+.box-9:hover .contents-9{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+}
+.box-9:hover .image-9{
+	transform: scale(1);
+}
+
+/*
+-------------------------------------zoom-in------------------------------------------------------
+*/
+
+.box-10{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-10{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+	transform: scale(1);
+	 
+}
+.contents-10{
+	position: absolute;
+	opacity: 0;
+	left: 50%;
+	top: 50%;
+	width: 0;
+	height: 0;
+	background-color: red;
+	transition: all 0.3s ease-in;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	transform: scale(0);
+	 
+}
+.head-10{
+	padding-top: 50px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-10{
+	font-size: 25px;
+	color: white;
+}
+.box-10:hover .contents-10{
+	opacity: 1;
+	height: 100%;
+	bottom: 0;
+	width: 100%;
+	background-color: red;
+	transform: scale(1);
+	top: 0;
+	left: 0;
+}
+.box-10:hover .image-10{
+	transform: scale(0);
+}
+
+/*
+-------------------------------------zoom-out------------------------------------------------------
+*/
+
+.box-11{
+	height: auto;
+	margin-right: 25px;
+	position: relative;
+	overflow: hidden;
+}
+.image-11{
+	display: block;
+	width: 100%;
+	transition: all 0.3s linear;
+	transform: scale(1);
+	 
+}
+.contents-11{
+	position: absolute;
+	z-index: -1;
+	opacity: 1;
+	height: 100%;
+	width: 100%;
+	background-color: red;
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 0;
+	display: none;
+	top: 0;
+	 
+}
+.head-11{
+	padding-top: 20px;
+	font-size: 40px;
+	color: white;
+	font-family: 'Lobster', cursive;
+	letter-spacing: 1.1px;
+}
+.text-11{
+	font-size: 25px;
+	color: white;
+}
+.box-11:hover .contents-11{
+	opacity: 1;	
+	background-color: red;
+	display: block;
+	position: none;
+
+}
+.box-11:hover .image-11{
+	transform: scale(0.4);
+	bottom: 0;
+
+}
+.contents-11 .icon{
+	padding-top:70px; 
+}
+
+.footer{
+	padding: 40px;
+	text-align: center;
+	color: white;
+	background-color: black;
+	margin-top: 475px;
+}
