@@ -6,8 +6,8 @@
 .colwidth{
 width: 640px;
 padding: 11px;
-color: black;
-background-color: red;
+color: white;
+background-color: purple;
 }
 {% endblock mystyle%}
 {% block title %}{{block.super}} Add Courses {% endblock title %}
@@ -25,7 +25,7 @@ background-color: red;
 
 {% block content2 %}
 <div class="container">
-  <h4 class="text-center text-danger m-4">Add Courses</h4>
+  <h2 class="text-center text-danger m-4">Add Courses</h2>
   <div class="row">
     <div class="col-lg-7 col-md-7 col-sm-12">
       {% if courses %}
@@ -315,7 +315,7 @@ background-color: red;
         {{ form|crispy }}
         {% endif %}
         <br>
-        <input type="submit" class="btn btn-danger mt-2 btn-block w-100">
+        <input type="submit" class="btn btn-primary mt-2 btn-block w-100">
       </form>
     </div>
   </div>
