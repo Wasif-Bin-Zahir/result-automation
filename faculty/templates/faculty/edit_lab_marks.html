@@ -1,34 +1,34 @@
 {% extends 'teacher_base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% load crispy_forms_filters %}  
+{% load crispy_forms_filters %}
 
 {% block mystyle %}
 .credit-margin{
-    margin-left: 80px;
+margin-left: 80px;
 }
 .course-margin{
-    margin-left: 120px;
+margin-left: 120px;
 }
 td{
-    border: 1px solid black;
+border: 1px solid black;
 }
 tr{
-    border-bottom: 1px solid black;
+border-bottom: 1px solid black;
 }
 th{
-    border: 2px solid black !important;
-    border-top: 2px solid black !important;
+border: 2px solid black !important;
+border-top: 2px solid black !important;
 }
 .table-padding{
-    padding: 0px 20px;
+padding: 0px 20px;
 }
 input[type=number]{
-    border: 1px solid blue;
+border: 1px solid blue;
 }
 {% endblock mystyle %}
-   
-{% block title %} Lab Marks {% endblock title %} 
+
+{% block title %} Lab Marks {% endblock title %}
 {% block content1 %}
 <div class="container">
     <div class="row">
@@ -37,8 +37,8 @@ input[type=number]{
             {% if messages %}
             {% for message in messages %}
             <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-            <strong>{{message.tags}}</strong> {{message}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endfor %}
             {% endif %}
@@ -47,44 +47,40 @@ input[type=number]{
 </div>
 {% endblock content1 %}
 {% block content2 %}
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="180px" width="70%">
-            </div>
-            <div class="col-9 mt-3">
-                <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
-                <h4 class="text-center">Department of Computer Science and Engineering</h4>
-                <h6 class="text-center text-danger mb-3">{{semister_no}} B.Sc. (Engg.) Final Examination, 202*</h6>
-                <div class="row mb-2">
-                    <div class="col-3">
-                        <h6>Course Code: {{c_code}} </h6>
-                    </div>
-                    <div class="col-3">
-                        <h6 class="credit-margin">Credit: {{credit}}</h6>
-                    </div>
-                    <div class="col-6">
-                        <h6>Course Title: {{c_name}}</h6>
-                    </div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-9 mt-3">
+
+            <div class="row mb-2">
+                <div class="col-3">
+                    <h6>Course Code: {{c_code}} </h6>
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                        <h5>Name of the Examiner(s)  :  {{c_teacher}} </h5>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="credit-margin">Full Marks : 50</h5>
-                    </div>
+                <div class="col-3">
+                    <h6 class="credit-margin">Credit: {{credit}}</h6>
+                </div>
+                <div class="col-6">
+                    <h6>Course Title: {{c_name}}</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h5>Name of the Examiner(s) : {{c_teacher}} </h5>
+                </div>
+                <div class="col-4">
+                    <h5 class="credit-margin">Full Marks : 50</h5>
                 </div>
             </div>
         </div>
     </div>
-        <div class="row mt-5 table-padding">
-            <h4 class="mb-3 text-center">Sessional/Lab Course (Final Practical exam/Sessinal & Viva-voce)</h4>
-            <form action="" method="POST">
-                {% csrf_token %}
-            <table class="table table-hover table-striped text-center table-bordered">
-                <thead>
-                  <tr>
+</div>
+<div class="row mt-5 table-padding">
+    <h4 class="mb-3 text-center">Sessional/Lab Course (Final Practical exam/Sessinal & Viva-voce)</h4>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table class="table table-hover table-striped text-center table-bordered">
+            <thead>
+                <tr>
                     <th scope="col">SL No</th>
                     <th scope="col">Examination Roll No.</th>
                     <th scope="col">Name of the Candidates</th>
@@ -92,178 +88,200 @@ input[type=number]{
                     <th scope="col">Lab Report Marks (20)</th>
                     <th scope="col">Lab Quiz Marks (20)</th>
                     <th scope="col">Remarks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for student, mark in regular_student.items %}
-                        <tr class="text-center">
-                            <td>{{mark.count}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{mark.full_name}}</td>
-                            {% if student.lab_attendence %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_attendence}}" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_report %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_report}}" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_quize %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_quize}}" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            <td>{{student.remarks}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for student, mark in backlog_student.items %}
-                        <tr class="text-center">
-                            <td>{{mark.count}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{mark.full_name}}</td>
-                            <{% if student.lab_attendence %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_attendence}}" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_report %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_report}}" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_quize %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_quize}}" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            <td class="text-danger">{{student.remarks}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for student, mark in special_student.items %}
-                        <tr class="text-center">
-                            <td>{{mark.count}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{mark.full_name}}</td>
-                            {% if student.lab_attendence %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_attendence}}" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_report %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_report}}" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            
-                            {% if student.lab_quize %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" value="{{student.lab_quize}}" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% else %}
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20" class="form-control text-center">
-                                </div>
-                            </td>
-                            {% endif %}
-                            <td class="text-danger">{{student.remarks}}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-              </table>
-              {% if submit_button == True %}
-                <div class="row">
-                    <div class="col-2">
-                        <a href={% url 'lab_course_details' c_code %} type="button" class="btn btn-info w-100">Course Home</a>
-                    </div>
-                    <div class="col-8"></div>
-                    <div class="col-2"><input type="submit" value="Submit" class="btn btn-success w-100"></div>
-                </div>
-              {% endif %}
-            </form>
-             
+                </tr>
+            </thead>
+            <tbody>
+                {% for student, mark in regular_student.items %}
+                <tr class="text-center">
+                    <td>{{mark.count}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{mark.full_name}}</td>
+                    {% if student.lab_attendence %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_attendence}}"
+                                name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+
+                    {% if student.lab_report %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_report}}" name="lab_report_{{student.student_id}}"
+                                min="0" max="20" class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+
+                    {% if student.lab_quize %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_quize}}" name="lab_quize_{{student.student_id}}"
+                                min="0" max="20" class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+
+                    <td>{{student.remarks}}</td>
+                </tr>
+                {% endfor %}
+                {% for student, mark in backlog_student.items %}
+                <tr class="text-center">
+                    <td>{{mark.count}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{mark.full_name}}</td>
+                    <{% if student.lab_attendence %} <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_attendence}}"
+                                name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                class="form-control text-center">
+                        </div>
+                        </td>
+                        {% else %}
+                        <td>
+                            <div class="form-group">
+                                <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                    class="form-control text-center">
+                            </div>
+                        </td>
+                        {% endif %}
+
+                        {% if student.lab_report %}
+                        <td>
+                            <div class="form-group">
+                                <input type="number" value="{{student.lab_report}}"
+                                    name="lab_report_{{student.student_id}}" min="0" max="20"
+                                    class="form-control text-center">
+                            </div>
+                        </td>
+                        {% else %}
+                        <td>
+                            <div class="form-group">
+                                <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20"
+                                    class="form-control text-center">
+                            </div>
+                        </td>
+                        {% endif %}
+
+                        {% if student.lab_quize %}
+                        <td>
+                            <div class="form-group">
+                                <input type="number" value="{{student.lab_quize}}"
+                                    name="lab_quize_{{student.student_id}}" min="0" max="20"
+                                    class="form-control text-center">
+                            </div>
+                        </td>
+                        {% else %}
+                        <td>
+                            <div class="form-group">
+                                <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20"
+                                    class="form-control text-center">
+                            </div>
+                        </td>
+                        {% endif %}
+                        <td class="text-danger">{{student.remarks}}</td>
+                </tr>
+                {% endfor %}
+                {% for student, mark in special_student.items %}
+                <tr class="text-center">
+                    <td>{{mark.count}}</td>
+                    <td>{{student.student_id}}</td>
+                    <td>{{mark.full_name}}</td>
+                    {% if student.lab_attendence %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_attendence}}"
+                                name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_attendence_{{student.student_id}}" min="0" max="10"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+
+                    {% if student.lab_report %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_report}}" name="lab_report_{{student.student_id}}"
+                                min="0" max="20" class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_report_{{student.student_id}}" min="0" max="20"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+
+                    {% if student.lab_quize %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" value="{{student.lab_quize}}" name="lab_quize_{{student.student_id}}"
+                                min="0" max="20" class="form-control text-center">
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="form-group">
+                            <input type="number" name="lab_quize_{{student.student_id}}" min="0" max="20"
+                                class="form-control text-center">
+                        </div>
+                    </td>
+                    {% endif %}
+                    <td class="text-danger">{{student.remarks}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% if submit_button == True %}
+        <div class="row">
+            <div class="col-2">
+                <a href={% url 'lab_course_details' c_code %} type="button" class="btn btn-info w-100">Course Home</a>
+            </div>
+            <div class="col-8"></div>
+            <div class="col-2"><input type="submit" value="Submit" class="btn btn-success w-100"></div>
         </div>
+        {% endif %}
+    </form>
+
+</div>
 {% endblock content2 %}
 
 
 {% block script %}
-  {{block.super}}
+{{block.super}}
 {% endblock script %}
-  
-  </body>
+
+</body>
+
 </html>
- 
