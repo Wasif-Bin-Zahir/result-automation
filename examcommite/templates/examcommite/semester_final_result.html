@@ -1,49 +1,49 @@
 {% extends 'exam_committe_base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% load crispy_forms_filters %}  
+{% load crispy_forms_filters %}
 
 {% block mystyle %}
 .credit-margin{
-    margin-left: 80px;
+margin-left: 80px;
 }
 .course-margin{
-    margin-left: 120px;
+margin-left: 120px;
 }
 td{
-    border: 1px solid black;
-    font-size: 10px;
+border: 1px solid black;
+font-size: 10px;
 }
 tr{
-    border-bottom: 1px solid black;
+border-bottom: 1px solid black;
 }
 th{
-    border: 1px solid black !important;
-    border-top: 1px solid black !important;
-    font-size: 11px;
+border: 1px solid black !important;
+border-top: 1px solid black !important;
+font-size: 11px;
 }
 .table-padding{
-    padding: 0px 20px;
+padding: 0px 20px;
 }
 .img-div{
-    margin-left: 150px
+margin-left: 150px
 }
 .navbar{
-    width: 2340px;
-    display: none;
+width: 2340px;
+display: none;
 }
 .footer{
-    width: 2340px;
-    display: none !important;
+width: 2340px;
+display: none !important;
 }
 .owner{
-    width: 2340px;
-    display: none;
+width: 2340px;
+display: none;
 }
 
 {% endblock mystyle %}
-   
-{% block title %} {{block.super}} semester final result {% endblock title %} 
+
+{% block title %} {{block.super}} semester final result {% endblock title %}
 {% block content1 %}
 <div class="container">
     <div class="row">
@@ -52,8 +52,8 @@ th{
             {% if messages %}
             {% for message in messages %}
             <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-            <strong>{{message.tags}}</strong> {{message}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{message.tags}}</strong> {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endfor %}
             {% endif %}
@@ -62,298 +62,168 @@ th{
 </div>
 {% endblock content1 %}
 {% block content2 %}
-    {% comment %} <div class="container"> {% endcomment %}
+{% comment %} <div class="container"> {% endcomment %}
 
-        <div class="row" style="width: 2220px">
-            <div class="col-3 mt-2 p-3" style="margin-left: 70px">
-                <p><b>Letter Grades and corresponding Grade Points Shall be determined as follows:</b></p>
-                <table class="table table-hover table-striped text-center table-bordered">
-                    <thead>
-                      <tr>
-                        <th scope="col">Numerical grade</th>
-                        <th scope="col">Letter grade</th>
-                        <th scope="col">Grade point</th>
-                        <th scope="col">No. of students receiving the grades</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>80% and above</td>
-                            <td>A+</td>
-                            <td>4.00</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>75% to less than 80%</td>
-                            <td>A</td>
-                            <td>3.75</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>70% to less than 75%</td>
-                            <td>A-</td>
-                            <td>3.50</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>65% to less than 70%</td>
-                            <td>B+</td>
-                            <td>3.25</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>60% to less than 65%</td>
-                            <td>B</td>
-                            <td>3.00</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>55% to less than 60%</td>
-                            <td>B-</td>
-                            <td>2.75</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>50% to less than 55%</td>
-                            <td>C+</td>
-                            <td>2.50</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>45% to less than 50%</td>
-                            <td>C</td>
-                            <td>2.25</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>40% to less than 45%</td>
-                            <td>D</td>
-                            <td>2.00</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>Less than 40%</td>
-                            <td>F</td>
-                            <td>0.00</td>
-                            <td>#</td>
-                        </tr>
-                        <tr>
-                            <td>Withdrawn</td>
-                            <td>W</td>
-                            <td>-</td>
-                            <td>#</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-7">
-                <div class="row">
-                    <div class="col-1 img-div">
-                        <img src="https://i.ibb.co/rMJ1HWV/OIP.jpg" alt="OIP" height="150px" width="200px">
-                    </div>
-                    <div class="col-9 mt-3">
-                        <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
-                        <h6 class="text-center">Santosh, Tangail, Bangladesh</h6>
-                        <h4 class="text-center">Tabulation Sheet</h4>
-                        <h6 class="text-center">Department:...............................................................................................................................................................</h6>
-                        <h6 class="text-center">........................Year.............................Semester B.Sc(Engg./Hons.)/BSS(Hons.)/BBA/B.Pharm. Final Examination, 20.................</h6>
-                        <h6 class="text-center">Held in: ................................................ Session: ......................................</h6>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <h6><b><u>Note:</u></b></h6>
-                        <h6><b>MO</b> = Mark Obtained</h6>
-                      
-                    </div>
-                    <div class="col-9"></div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <h6>      <b>LG</b> = Letter Grade</h6>
-                        <h6>      <b>PS</b> = Point Secured = GP * Credit</h6>
-                        
-                        <h6>      <b>CT</b> = Credits Taken/CO = Credits Offered</h6>
-                        <h6>      <b>CE</b> = Credits Earned</h6>
-                        <h6>      Total Point Secured(<b>TPS</b> ) = SUM(<b>PS</b> )</h6>
-                        <h6>      Grade Points Average(<b>GPA</b> ) = TPS/CE/TPS/CO</h6>
-                    </div>
-                    <div class="col-5">
-                        <h6><b>JAMH</b>  = Jananeta Abdul Mannan Hall</h6>
-                        <h6><b> AKBH</b> = Alema Khatun Bhashani Hall</h6>
-                        <h6><b>BSMRH</b>  = Bangabandhu Sheikh Mujibur Rahman Hall</h6>
-                        <h6><b>SZRH</b>  = Shaheed Ziaur Rahman Hall</h6>
-                        <h6><b> SJJH</b> = Shaheed Janani Jahanara Imam Hall</h6>
-                        <h6><b>SRH</b>  = Sheikh Rasel Hall</h6>
-                    </div>
-                    <div class="col-4"></div>
+    <div class="row" style="width: 2220px">
+
+
+
+
+
+        <div class="col-7">
+            <div class="row align-items-center">
+
+                <div class="col-9 mt-3">
+                    <h2 class="text-center">Mawlana Bhashani Science and Technology University</h2>
+
+                    <h4 class="text-center">Tabulation Sheet</h4>
+
                 </div>
             </div>
-            <div class="col-2 mt-3" style="margin-left: -70px">
-                <table class="table table-hover table-striped table-bordered">
-                    <thead>
-                      <tr>
+            <div class="row">
+                <div class="col-3">
+                    <h6><b><u>Note:</u></b></h6>
+                    <h6><b>MO</b> = Mark Obtained</h6>
+
+                </div>
+                <div class="col-9"></div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6> <b>LG</b> = Letter Grade</h6>
+                    <h6> <b>PS</b> = Point Secured = GP * Credit</h6>
+
+                    <h6> <b>CT</b> = Credits Taken/CO = Credits Offered</h6>
+                    <h6> <b>CE</b> = Credits Earned</h6>
+                    <h6> Total Point Secured(<b>TPS</b> ) = SUM(<b>PS</b> )</h6>
+                    <h6> Grade Points Average(<b>GPA</b> ) = TPS/CE/TPS/CO</h6>
+                </div>
+
+                <div class="col-4"></div>
+            </div>
+        </div>
+        <div class="col-2 mt-3 ">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
                         <th scope="col" style="width: 100px !important">Course Code</th>
                         <th scope="col">Course Title</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        {% for course in courses %}
-                            <tr>
-                                <td>{{course.course_code}}</td>
-                                <td>{{course.course_name}}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    {% comment %} </div> {% endcomment %}
-        <div class="row mt-5 table-padding">
-            <table class="table table-hover table-striped text-center table-bordered">
-                <thead>
-                  <tr>
-                    <th scope="col">SL No</th>
-                    <th scope="col">Hall</th>
-                    <th scope="col">Student ID</th>
-                    <th scope="col" style="width: 300px !important">Name of the Candidates</th>
-                    {% for course in courses %}
-                    <th scope="col" colspan="4">Course Code: <br> <span><u>{{course.course_code}}</u></span> <br> Credit: <span><u>{{course.credit}}</u></span> </th>
-                    {% endfor %}
-                    <th scope="col">CT</th>
-                    <th scope="col">CE</th>
-                    <th scope="col">TPS</th>
-                    <th scope="col">GPA</th>
-                    <th scope="col">RESULT</th>
-                  </tr>
+                    </tr>
                 </thead>
                 <tbody>
+                    {% for course in courses %}
                     <tr>
-                        <td colspan="4">Credits</td>
-                        {% for course in courses %}
-                        <td colspan="4">{{course.credit}}</td>
-                        {% endfor %}
-                        <td>{{total_credit}}</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
+                        <td>{{course.course_code}}</td>
+                        <td>{{course.course_name}}</td>
                     </tr>
-                    <tr>
-                        <td colspan="4"></td>
-                        {% for course in courses %}
-                            <td>MO <br> (%)</td>
-                            <td>LG</td>
-                            <td>GP</td>
-                            <td>PS</td>
-                        {% endfor %}
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
-                    </tr>
-                    {% for student, ps_value in student_info.items %}
-                        <tr class="text-center">
-                            <td>{{forloop.counter}}</td>
-                            <td>{{student.hall}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{student.first_name}} {{student.last_name}}</td>
-                            {% for key, value in ps_value.items %}
-                                {% for k, v in value.items %}
-                                    <td>{{v}}</td>
-                                {% endfor %}
-                            {% endfor %}
-                            <td>{{ps_value.total_credit}}</td>
-                            <td>{{ps_value.credit_earn}}</td>
-                            <td>{{ps_value.tps}}</td>
-                            <td>{{ps_value.gpa}}</td>
-                            <td>{{ps_value.result}}</td>
-                          
-                        </tr>
-                    {% endfor %}
-                    {% for student, mark in backlog_student.items %}
-                        <tr class="text-center">
-                            <td>{{mark.count}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{mark.full_name}}</td>
-                            <td>{{mark.total_marks_100}}</td>
-                            <td>{{mark.LG}}</td>
-                            <td>{{mark.GP}}</td>
-                            <td>{{mark.PS}}</td>
-                        </tr>
-                    {% endfor %}
-                    {% for student, mark in special_student.items %}
-                        <tr class="text-center">
-                            <td>{{mark.count}}</td>
-                            <td>{{student.student_id}}</td>
-                            <td>{{mark.full_name}}</td>
-                            <td>{{mark.total_marks_100}}</td>
-                            <td>{{mark.LG}}</td>
-                            <td>{{mark.GP}}</td>
-                            <td>{{mark.PS}}</td>
-                        </tr>
                     {% endfor %}
                 </tbody>
-              </table>
+            </table>
         </div>
-        <div class="row p-1" style="margin-top: 50px; width: 2220px">
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-6">
-                        <h6 class="mb-3">Signature of Tabulators</h6>
-                        <p><b>1.</b>...............................................................</p>
-                        <p><b>2.</b>...............................................................</p>
-                        <p><b>3.</b>...............................................................</p>
-                    </div>
-                    <div class="col-6">
-                        <h6 class="mb-3">Full Name:</h6>
-                        <p><b>1.</b>...............................................................</p>
-                        <p><b>2.</b>...............................................................</p>
-                        <p><b>3.</b>...............................................................</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <h6 style="margin-bottom: 70px">Results Published on: ............................................</h6>
-                <h6>Controller of Examinations</h6>
-                <h6>Date: ............................................................</h6>
-            </div>
-            <div class="col-6">
-                <p class="text-center"><b>Certified that the results have been finalised by the Examination Committee as per Ordinance, Rules and Regulations.</b></p>
-                <div class="row">
-                    <div class="col-6">
-                        <h6 style="text-indent: 80px;">1. ........................................ Chairman of Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">2. ....................................... Member of  Examination Committee</h6>
-                        <h6>Signature: 3. .......................................... Member of  Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">4. ....................................... Member of  Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">5. ....................................... Member of  Examination Committee</h6>
-                    </div>
-                    <div class="col-6">
-                        <h6 style="text-indent: 80px;">1. ........................................Chairman of Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">2. ....................................... Member of  Examination Committee</h6>
-                        <h6>Full Name: 3. ........................................ Member of  Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">4. .......................................... Member of  Examination Committee</h6>
-                        <h6 style="text-indent: 80px;">5. .......................................... Member of  Examination Committee</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-1 text-center">
-                <div>
-                    <h6 style="margin-top: 130px;">Vice-Chancellor</h6>
-                </div>
-            </div>
-        </div>
-        {% comment %} <div class="row">
-            <button onclick="window.print()" style="width:50px;" class="btn btn-danger">Print</button>
-        </div> {% endcomment %}
+    </div>
+    {% comment %}
+</div> {% endcomment %}
+<div class="row mt-5 table-padding">
+    <table class="table table-hover table-striped text-center table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">SL No</th>
+                <th scope="col">Hall</th>
+                <th scope="col">Student ID</th>
+                <th scope="col" style="width: 300px !important">Name of the Candidates</th>
+                {% for course in courses %}
+                <th scope="col" colspan="4">Course Code: <br> <span><u>{{course.course_code}}</u></span> <br> Credit:
+                    <span><u>{{course.credit}}</u></span><br>
+                </th>
+                {% endfor %}
+                <th scope="col">CT</th>
+                <th scope="col">CE</th>
+                <th scope="col">TPS</th>
+                <th scope="col">GPA</th>
+                <th scope="col">RESULT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">Credits</td>
+                {% for course in courses %}
+                <td colspan="4">{{course.credit}}</td>
+                {% endfor %}
+                <td>{{total_credit}}</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                {% for course in courses %}
+                <td>MO <br> (%)</td>
+                <td>LG</td>
+                <td>GP</td>
+                <td>PS</td>
+                {% endfor %}
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+            </tr>
+            {% for student, ps_value in student_info.items %}
+            <tr class="text-center">
+                <td>{{forloop.counter}}</td>
+                <td>{{student.hall}}</td>
+                <td>{{student.student_id}}</td>
+                <td>{{student.first_name}} {{student.last_name}}</td>
+                {% for key, value in ps_value.items %}
+                {% for k, v in value.items %}
+                <td>{{v}}</td>
+                {% endfor %}
+                {% endfor %}
+                <td>{{ps_value.total_credit}}</td>
+                <td>{{ps_value.credit_earn}}</td>
+                <td>{{ps_value.tps}}</td>
+                <td>{{ps_value.gpa}}</td>
+                <td>{{ps_value.result}}</td>
+
+            </tr>
+            {% endfor %}
+            {% for student, mark in backlog_student.items %}
+            <tr class="text-center">
+                <td>{{mark.count}}</td>
+                <td>{{student.student_id}}</td>
+                <td>{{mark.full_name}}</td>
+                <td>{{mark.total_marks_100}}</td>
+                <td>{{mark.LG}}</td>
+                <td>{{mark.GP}}</td>
+                <td>{{mark.PS}}</td>
+            </tr>
+            {% endfor %}
+            {% for student, mark in special_student.items %}
+            <tr class="text-center">
+                <td>{{mark.count}}</td>
+                <td>{{student.student_id}}</td>
+                <td>{{mark.full_name}}</td>
+                <td>{{mark.total_marks_100}}</td>
+                <td>{{mark.LG}}</td>
+                <td>{{mark.GP}}</td>
+                <td>{{mark.PS}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% comment %} <div class="row">
+    <button onclick="window.print()" style="width:50px;" class="btn btn-danger">Print</button>
+</div> {% endcomment %}
 {% endblock content2 %}
 
 
 {% block script %}
-  {{block.super}}
+{{block.super}}
 {% endblock script %}
-  
-  </body>
+
+</body>
+
 </html>
- 
