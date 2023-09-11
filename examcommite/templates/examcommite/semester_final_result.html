@@ -129,16 +129,16 @@ display: none;
             <tr>
                 <th scope="col">SL No</th>
                 <th scope="col">Hall</th>
-                <th scope="col">Student ID</th>
-                <th scope="col" style="width: 300px !important">Name of the Candidates</th>
+                <th scope="col"> ID</th>
+                <th scope="col" style="width: 300px !important">Name</th>
                 {% for course in courses %}
-                <th scope="col" colspan="4">Course Code: <br> <span><u>{{course.course_code}}</u></span> <br> Credit:
-                    <span><u>{{course.credit}}</u></span><br>
+                <th scope="col" colspan="4">Course Code: <br> <span>{{course.course_code}}</span>
+
                 </th>
                 {% endfor %}
-                <th scope="col">CT</th>
+                <!-- <th scope="col">CT</th>
                 <th scope="col">CE</th>
-                <th scope="col">TPS</th>
+                <th scope="col">TPS</th> -->
                 <th scope="col">GPA</th>
                 <th scope="col">RESULT</th>
             </tr>
@@ -180,9 +180,9 @@ display: none;
                 <td>{{v}}</td>
                 {% endfor %}
                 {% endfor %}
-                <td>{{ps_value.total_credit}}</td>
+                <!-- <td>{{ps_value.total_credit}}</td>
                 <td>{{ps_value.credit_earn}}</td>
-                <td>{{ps_value.tps}}</td>
+                <td>{{ps_value.tps}}</td> -->
                 <td>{{ps_value.gpa}}</td>
                 <td>{{ps_value.result}}</td>
 
